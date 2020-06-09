@@ -1,4 +1,6 @@
 import 'reflect-metadata';
+import { MetaKeys } from "./MetaKeys";
+import { Methods } from './Methods';
 
 /**
  * Route function factory.
@@ -10,14 +12,14 @@ function routeBinder(method: string) {
     return function(path: string) {
         return function(target: any, key: string, desc: PropertyDescriptor) {
             // Attach the metadata to the object(function in the class) using TypeScript's decorator.
-            Reflect.defineMetadata("path", path, target, key);
-            Reflect.defineMetadata("method", method, target, key);
+            Reflect.defineMetadata(MetaKeys.Path, path, target, key);
+            Reflect.defineMetadata(MetaKeys.Method, method, target, key);
         }
     }
 }
 
-export const Get = routeBinder("get");
-export const Put = routeBinder("put");
-export const Post = routeBinder("post");
-export const Delete = routeBinder("delete");
-export const Patch = routeBinder("patch");
+export const Get = routeBinder(Methods.Get);
+export const Put = routeBinder(Methods.Put);
+export const Post = routeBinder(Methods.Post);
+export const Delete = routeBinder(Methods.Delete);
+export const Patch = routeBinder(Methods.Patch);
