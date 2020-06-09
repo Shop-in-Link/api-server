@@ -7,7 +7,7 @@ import { MetaKeys } from "./MetaKeys";
  * Use decorator function factory.
  * The "Use" decorator adds middleware to the controller.
  *
- * @param middleware
+ * @param middleware A middleware to add.
  */
 export function Use(middleware: RequestHandler) {
     return function(target: any, key: string, desc: PropertyDescriptor) {
