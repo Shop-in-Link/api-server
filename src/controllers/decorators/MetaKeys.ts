@@ -1,5 +1,6 @@
 export enum MetaKeys {
     Method = 'method',
     Path = 'path',
-    Middleware = 'middleware'
+    Middleware = 'middleware',
+    BodyHas = 'bodyHas'
 }
