@@ -6,7 +6,7 @@ import { AppRouter } from "./AppRouter";
 
 const app = express();
 
-app.use(AppRouter.getInstance())
+app.use(AppRouter.getInstance());
 
 const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-mnzxu.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
