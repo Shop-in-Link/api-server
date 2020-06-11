@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "concurrently": "^5.2.0",
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
