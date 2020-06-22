@@ -1,0 +1,16 @@
+input UserNameInput {
+    firstName: String!
+    lastName: String!
+    nickName: String!
+}
+
+input CreateUserInput {
+    email: String!
+    password: String!
+    name: UserNameInput!
+    userType: UserType!
+}
+
+type Mutation {
+    createUser(userInput: CreateUserInput): User!
+}
