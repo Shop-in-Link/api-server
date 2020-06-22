@@ -1,12 +1,17 @@
 import express from 'express';
+import { ApolloServer } from "apollo-server-express";
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
+import { mergedTypeDefs as typeDefs, mergedResolvers as resolvers } from "./graphql";
 import { AppRouter } from "./AppRouter";
 
 const app = express();
+const server = new ApolloServer({ typeDefs, resolvers });
 
 app.use(AppRouter.getInstance());
+
+server.applyMiddleware({ app });
 
 const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-mnzxu.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
