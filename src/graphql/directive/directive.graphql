@@ -1,0 +1,11 @@
+directive @validate(
+    # Validate string.
+    minLength: Int
+    maxLength: Int
+    format: StringFormat
+) on INPUT_FIELD_DEFINITION
+
+enum StringFormat {
+    EMAIL
+    FQDN
+}
