@@ -4,10 +4,11 @@ import mongoose from 'mongoose';
 import 'dotenv/config';
 
 import { mergedTypeDefs as typeDefs, mergedResolvers as resolvers } from "./graphql";
+import { ValidateDirective } from './graphql/directive/ValidateDirective';
 import { AppRouter } from "./AppRouter";
 
 const app = express();
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers, schemaDirectives: { validate: ValidateDirective } });
 
 app.use(AppRouter.getInstance());
 
