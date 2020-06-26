@@ -10,7 +10,6 @@ export default {
          * @param userInput User inputs sent through GraphQL.
          */
         createUser: async (parent: any, { userInput }: ICreateUserInput) => {
-            // TODO: Add validation logic.
             const { email, password, name, userType } = userInput;
 
             const hashedPassword = await bcrypt.hash(password, 12);
