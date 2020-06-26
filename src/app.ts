@@ -1,11 +1,11 @@
 import express from 'express';
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer } from 'apollo-server-express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-import { mergedTypeDefs as typeDefs, mergedResolvers as resolvers } from "./graphql";
+import { mergedTypeDefs as typeDefs, mergedResolvers as resolvers } from './graphql';
 import { ValidateDirective } from './graphql/directive/ValidateDirective';
-import { AppRouter } from "./AppRouter";
+import { AppRouter } from './AppRouter';
 
 const app = express();
 const server = new ApolloServer({ typeDefs, resolvers, schemaDirectives: { validate: ValidateDirective } });

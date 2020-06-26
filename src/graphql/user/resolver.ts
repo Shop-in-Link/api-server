@@ -1,5 +1,6 @@
-import bcrypt from "bcrypt";
-import User, { IUser } from "../../models/user";
+import bcrypt from 'bcrypt';
+
+import User, { IUser } from '../../models/user';
 
 export default {
     Mutation: {
