@@ -1,12 +1,12 @@
 input UserNameInput {
-    firstName: String!
-    lastName: String!
-    nickName: String!
+    firstName: String! @validate(minLength: 1, maxLength: 64)
+    lastName: String! @validate(minLength: 1, maxLength: 64)
+    nickName: String! @validate(minLength: 2, maxLength: 8)
 }
 
 input CreateUserInput {
-    email: String!
-    password: String!
+    email: String! @validate(format: EMAIL, maxLength: 255)
+    password: String! @validate(minLength: 6, maxLength:32)
     name: UserNameInput!
     userType: UserType!
 }
