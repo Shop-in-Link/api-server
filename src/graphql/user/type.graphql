@@ -15,3 +15,9 @@ type User {
     createdAt: String!
     updatedAt: String!
 }
+
+enum Role {
+    Admin
+    Vendor
+    User
+}

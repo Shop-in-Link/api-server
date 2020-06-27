@@ -5,13 +5,11 @@ directive @validate(
     format: StringFormat
 ) on INPUT_FIELD_DEFINITION
 
+directive @auth(
+    requires: Role
+) on OBJECT | FIELD_DEFINITION
+
 enum StringFormat {
     EMAIL
     FQDN
-}
-
-enum Role {
-    Admin
-    Vendor
-    User
 }
