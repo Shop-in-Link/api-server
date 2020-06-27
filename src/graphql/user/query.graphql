@@ -1,0 +1,8 @@
+type AuthData {
+    token: String!
+    userId: String!
+}
+
+type Query {
+    login(email: String! , password: String!): AuthData!
+}
