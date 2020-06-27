@@ -2,6 +2,9 @@ import { SchemaDirectiveVisitor, UserInputError } from 'apollo-server-express';
 import { GraphQLInputField, GraphQLScalarType, GraphQLNonNull } from 'graphql';
 import validator from 'validator';
 
+/**
+ * Create new ValidatedStringType instance from GraphQLScalarType.
+ */
 export class ValidateDirective extends SchemaDirectiveVisitor {
     visitInputFieldDefinition(field: GraphQLInputField): GraphQLInputField | void | null {
         if (field.type instanceof GraphQLNonNull &&
@@ -18,6 +21,9 @@ export class ValidateDirective extends SchemaDirectiveVisitor {
     }
 }
 
+/**
+ * ValidatedStringType validates the string to a given condition.
+ */
 class ValidatedStringType extends GraphQLScalarType {
     constructor(type: GraphQLScalarType, args: Validators) {
         super({
@@ -25,18 +31,21 @@ class ValidatedStringType extends GraphQLScalarType {
                 .map(([key, value]) => `${key}_${value.toString().replace(/\W/g, '')}`)
                 .join('_')}`,
 
+            // serialize gets invoked when serializing the result to send it back to a client.
             serialize(value) {
                 value = type.serialize(value);
 
                 return value;
             },
 
+            // parseValue gets invoked th parse client input that was passed through variables.
             parseValue(value) {
                 validate(value, args);
 
                 return type.parseValue(value);
             },
 
+            // parseLiteral gets invoked to parse client input that was passed inline in the query.
             parseLiteral(ast) {
                 return type.parseLiteral(ast, null);
             }
