@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
-import { UserType } from "./enums/UserType";
+import { Role } from "./enums/Role";
 
 /**
  * User schema.
@@ -12,7 +12,7 @@ const userSchema = new Schema({
         lastName: { type: String, required: true },
         nickName: { type: String, required: true },
     },
-    type: { type: String, required: true, enum: [UserType.User, UserType.Vendor] },
+    role: { type: String, required: true, enum: [Role.User, Role.Vendor] },
     businessLicense: { type: String, required: false },
     loginAt: { type: Date, required: false },
 }, { timestamps: true });
@@ -24,7 +24,7 @@ export interface IUser extends Document {
     email: string;
     password: string;
     name: { firstName: string; lastName: string; nickName: string; };
-    type: UserType;
+    role: Role;
     businessLicense?: string;
     loginAt?: string;
     createdAt: string;

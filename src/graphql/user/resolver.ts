@@ -11,7 +11,7 @@ export default {
          * @param userInput User inputs sent through GraphQL.
          */
         createUser: async (parent: any, { userInput }: ICreateUserInput) => {
-            const { email, password, name, userType } = userInput;
+            const { email, password, name, role } = userInput;
 
             const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -19,7 +19,7 @@ export default {
                 email: email,
                 password: hashedPassword,
                 name: name,
-                type: userType
+                role: role
             });
 
             const createdUser = await user.save();
@@ -34,6 +34,6 @@ interface ICreateUserInput {
         email: IUser['email'];
         password: IUser['password'];
         name: IUser['name'];
-        userType: IUser['type'];
+        role: IUser['role'];
     }
 }

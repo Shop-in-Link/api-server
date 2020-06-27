@@ -9,3 +9,9 @@ enum StringFormat {
     EMAIL
     FQDN
 }
+
+enum Role {
+    Admin
+    Vendor
+    User
+}

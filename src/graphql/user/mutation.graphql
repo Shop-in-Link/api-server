@@ -8,7 +8,7 @@ input CreateUserInput {
     email: String! @validate(format: EMAIL, maxLength: 255)
     password: String! @validate(minLength: 6, maxLength:32)
     name: UserNameInput!
-    userType: UserType!
+    role: Role!
 }
 
 type Mutation {
