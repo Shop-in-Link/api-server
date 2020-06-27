@@ -27,7 +27,6 @@ class ValidatedStringType extends GraphQLScalarType {
 
             serialize(value) {
                 value = type.serialize(value);
-                validate(value, args);
 
                 return value;
             },
