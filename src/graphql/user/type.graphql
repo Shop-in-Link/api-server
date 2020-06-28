@@ -20,4 +20,6 @@ enum Role {
     Admin
     Vendor
     User
+    # Auth means Authenticated user. It is only used to check the user is authenticated or not.
+    Auth
 }
