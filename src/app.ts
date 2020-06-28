@@ -5,10 +5,16 @@ import 'dotenv/config';
 
 import { mergedTypeDefs as typeDefs, mergedResolvers as resolvers } from './graphql';
 import { ValidateDirective } from './graphql/directive/ValidateDirective';
+import { contextHandler } from './utils/contextHandler';
 import { AppRouter } from './AppRouter';
 
 const app = express();
-const server = new ApolloServer({ typeDefs, resolvers, schemaDirectives: { validate: ValidateDirective } });
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    schemaDirectives: { validate: ValidateDirective },
+    context: contextHandler
+});
 
 app.use(AppRouter.getInstance());
 
