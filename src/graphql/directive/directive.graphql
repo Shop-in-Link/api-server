@@ -12,4 +12,5 @@ directive @auth(
 enum StringFormat {
     EMAIL
     FQDN
+    URL
 }

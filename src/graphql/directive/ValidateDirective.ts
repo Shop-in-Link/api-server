@@ -73,6 +73,12 @@ class ValidatedStringType extends GraphQLScalarType {
                             throw new UserInputError('Not fully qualified domain name.');
                         }
                         break;
+
+                    case ValidatorStringFormat.URL:
+                        if (!validator.isURL(value)) {
+                            throw new UserInputError('Not URL format.');
+                        }
+                        break;
                 }
             }
         }
@@ -87,5 +93,6 @@ interface Validators {
 
 enum ValidatorStringFormat {
     EMAIL = 'EMAIL',
-    FQDN = 'FQDN'
+    FQDN = 'FQDN',
+    URL = 'URL'
 }
