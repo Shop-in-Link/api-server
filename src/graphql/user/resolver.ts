@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import User, { IUser } from '../../models/user';
 import { readJwtSecret } from '../../utils/key/jwt';
+import { ITokenPayload } from '../../utils/TokenPayload';
 
 export default {
     Mutation: {
@@ -50,11 +51,13 @@ export default {
                 throw new UserInputError('Password is incorrect.');
             }
 
+            const tokenPayload: ITokenPayload = {
+                userId: user._id.toString(),
+                email: user.email
+            };
+
             const token = await jwt.sign(
-                {
-                    userId: user._id.toString(),
-                    email: user.email
-                },
+                tokenPayload,
                 await readJwtSecret(),
                 { algorithm: 'RS256', expiresIn: '1 h' }
             );
