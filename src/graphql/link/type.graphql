@@ -1,0 +1,12 @@
+type Link {
+    _id: ID!
+    marketFqdn: String!
+    productPath: String!
+    productParameter: String
+    productUrl: String!
+    shopInLinkPath: String!
+    owner: ID!
+    expiresAt: String!
+    createdAt: String!
+    updatedAt: String!
+}

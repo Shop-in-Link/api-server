@@ -1,0 +1,7 @@
+input MarketLinkInput {
+    marketUrl: String! @validate(format: URL, maxLength: 4000)
+}
+
+type Mutation {
+    createLink(marketLink: MarketLinkInput): Link! @auth(requires: Auth)
+}
