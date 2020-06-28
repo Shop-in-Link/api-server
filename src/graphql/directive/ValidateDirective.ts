@@ -62,13 +62,13 @@ class ValidatedStringType extends GraphQLScalarType {
 
             if (args.format) {
                 switch (args.format) {
-                    case 'EMAIL':
+                    case ValidatorStringFormat.EMAIL:
                         if (!validator.isEmail(value)) {
                             throw new UserInputError('Not email format.');
                         }
                         break;
 
-                    case 'FQDN':
+                    case ValidatorStringFormat.FQDN:
                         if (!validator.isFQDN(value)) {
                             throw new UserInputError('Not fully qualified domain name.');
                         }
@@ -82,5 +82,10 @@ class ValidatedStringType extends GraphQLScalarType {
 interface Validators {
     minLength?: number;
     maxLength?: number;
-    format?: string;
+    format?: ValidatorStringFormat;
+}
+
+enum ValidatorStringFormat {
+    EMAIL = 'EMAIL',
+    FQDN = 'FQDN'
 }
