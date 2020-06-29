@@ -1,6 +1,8 @@
 import mongoose, { Schema, Document } from "mongoose";
 import { Role } from "./enums/Role";
 
+import Link from './link';
+
 /**
  * User schema.
  */
@@ -16,6 +18,11 @@ const userSchema = new Schema({
     businessLicense: { type: String, required: false },
     loginAt: { type: Date, required: false },
 }, { timestamps: true });
+
+// Add hook to remove all user's links.
+userSchema.pre<IUser>('remove', async function() {
+    await Link.deleteMany({ owner: this._id });
+});
 
 /**
  * User interface.

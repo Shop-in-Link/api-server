@@ -29,6 +29,26 @@ export default {
             const createdUser = await user.save();
 
             return { ...createdUser._doc, _id: createdUser._id.toString() };
+        },
+
+        /**
+         * Delete the user.
+         * UserSchema hooks 'document@remove' to delete all owned links.
+         *
+         * @param parent Parent of resolver chain.
+         * @param args Should be null.
+         * @param tokenPayload A JWT payload injected from context handler.
+         */
+        deleteUser: async (parent: any, args: any, { tokenPayload }: { tokenPayload: ITokenPayload }) => {
+            const user = await User.findById(tokenPayload.userId);
+
+            if (!user) {
+                return false;
+            }
+
+            user.remove();
+
+            return true;
         }
     },
 
