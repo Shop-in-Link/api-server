@@ -1,5 +1,5 @@
-import mongoose, { Schema, Document } from "mongoose";
-import { Role } from "./enums/Role";
+import mongoose, { Schema, Document } from 'mongoose';
+import { Role } from './enums/Role';
 
 import Link from './link';
 
