@@ -71,6 +71,11 @@ export default {
                 throw new UserInputError('Password is incorrect.');
             }
 
+            // Update login time.
+            user.loginAt = Date.now().toString();
+            user.save();
+
+            // Generate JWT.
             const tokenPayload: ITokenPayload = {
                 userId: user._id.toString(),
                 email: user.email
