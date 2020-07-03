@@ -8,7 +8,7 @@ const linkSchema = new Schema({
     marketFqdn: { type: String, required: true, lowercase: true, index: true },
     productPath: { type: String, required: true },
     productParameter: { type: String, required: false },
-    shopInLinkPath: { type: String, required: true },
+    shopInLinkPath: { type: String, required: true, unique: true },
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     expiresAt: { type: Date, required: true }
 }, { timestamps: true, toJSON: { virtuals: true } });
