@@ -60,8 +60,13 @@ export default {
                 throw new UserInputError('Link does not exist.');
             }
 
-            // If the link has expired.
-            if (Date.now() > Date.parse(link.expiresAt)) {
+            // If the link has expiresAt and has expired.
+            if (link.expiresAt && Date.now() > Date.parse(link.expiresAt)) {
+                throw new UserInputError('Link has expired.');
+            }
+
+            // If the link has expiresView and has expired.
+            if (link.expiresView && link.visitors >= link.expiresView) {
                 throw new UserInputError('Link has expired.');
             }
 

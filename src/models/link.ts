@@ -11,7 +11,8 @@ const linkSchema = new Schema({
     shopInLinkPath: { type: String, required: true, unique: true },
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
     visitors: { type: Number, required: true, default: 0 },
-    expiresAt: { type: Date, required: true }
+    expiresAt: { type: Date, required: false },
+    expiresView: { type: Number, required: false },
 }, { timestamps: true, toJSON: { virtuals: true } });
 
 linkSchema.virtual('productUrl').get(function(this: ILink): string {
@@ -29,7 +30,8 @@ export interface ILink extends Document {
     shopInLinkPath: string;
     owner: IUser['_id'];
     visitors: number;
-    expiresAt: string;
+    expiresAt?: string;
+    expiresView?: number;
     createdAt: string;
     updatedAt: string;
 }
