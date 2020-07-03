@@ -43,6 +43,36 @@ export default {
             const createdLink = await link.save();
 
             return { ...createdLink._doc, _id: createdLink._id.toString(), productUrl: createdLink.productUrl };
+        },
+
+        /**
+         * Return the URL of the actual shop bound to shopInLinkPath.
+         *
+         * @param parent Parent of resolver chain.
+         * @param shopInLinkPath A ShopInLink path to visit.
+         *
+         * @return Shop URL to visit.
+         */
+        visitLink: async (parent: any, { shopInLinkPath }: { shopInLinkPath: IShopInLinkPathInput }) => {
+            const link = await Link.findOne({ shopInLinkPath: shopInLinkPath.shopInLinkPath });
+
+            if (!link) {
+                throw new UserInputError('Link does not exist.');
+            }
+
+            // If the link has expired.
+            if (Date.now() > Date.parse(link.expiresAt)) {
+                throw new UserInputError('Link has expired.');
+            }
+
+            // To avoid race condition problem,
+            // findOneAndUpdate() must be used instead of Model.save().
+            await Link.findOneAndUpdate(
+                { shopInLinkPath: shopInLinkPath.shopInLinkPath },
+                { $inc: { visitors: 1 } }
+            );
+
+            return link.productUrl;
         }
     }
 };
@@ -84,4 +114,8 @@ function getHashedString(plainText: string): string {
 
 interface IMarketLinkInput {
     marketUrl: string;
+}
+
+interface IShopInLinkPathInput {
+    shopInLinkPath: string;
 }

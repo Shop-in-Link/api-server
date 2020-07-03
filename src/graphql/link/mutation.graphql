@@ -2,6 +2,11 @@ input MarketLinkInput {
     marketUrl: String! @validate(format: URL, maxLength: 4000)
 }
 
+input ShopInLinkPathInput {
+    shopInLinkPath: String! @validate(minLength: 10, maxLength: 20)
+}
+
 type Mutation {
     createLink(marketLink: MarketLinkInput): Link! @auth(requires: Auth)
+    visitLink(shopInLinkPath: ShopInLinkPathInput): String!
 }
