@@ -4,6 +4,11 @@ type UserName {
     nickName: String!
 }
 
+type Points {
+    purchased: Int!
+    earned: Int!
+}
+
 type User {
     _id: ID!
     email: String!
@@ -11,6 +16,7 @@ type User {
     name: UserName!
     role: Role!
     businessLicense: String
+    points: Points!
     loginAt: String
     createdAt: String!
     updatedAt: String!

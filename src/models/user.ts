@@ -16,6 +16,10 @@ const userSchema = new Schema({
     },
     role: { type: String, required: true, enum: [Role.User, Role.Vendor] },
     businessLicense: { type: String, required: false },
+    points: {
+        purchased: { type: Number, required: true, default: 0 },
+        earned: { type: Number, required: true, default: 0 }
+    },
     loginAt: { type: Date, required: false },
 }, { timestamps: true });
 
@@ -33,6 +37,7 @@ export interface IUser extends Document {
     name: { firstName: string; lastName: string; nickName: string; };
     role: Role;
     businessLicense?: string;
+    points: { purchased: number; earned: number; };
     loginAt?: string;
     createdAt: string;
     updatedAt: string;
