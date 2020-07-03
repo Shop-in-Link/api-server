@@ -6,6 +6,7 @@ type Link {
     productUrl: String!
     shopInLinkPath: String!
     owner: ID!
+    visitors: Int!
     expiresAt: String!
     createdAt: String!
     updatedAt: String!
