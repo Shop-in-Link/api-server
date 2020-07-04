@@ -70,6 +70,8 @@ export default {
                 throw new UserInputError('Link has expired.');
             }
 
+            // TODO: Verify that access is legal or not.
+
             // To avoid race condition problem,
             // findOneAndUpdate() must be used instead of Model.save().
             await Link.findOneAndUpdate(
