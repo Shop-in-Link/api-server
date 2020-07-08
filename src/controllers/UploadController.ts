@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
-import { Controller, Post } from './decorators';
+import { Controller, Post, Use } from './decorators';
+import { isAuth } from '../middlewares/isAuth';
 
 @Controller('/upload')
 class UploadController {
@@ -11,6 +12,7 @@ class UploadController {
      * @param res Response object from Express.
      */
     @Post('/businessLicense')
+    @Use(isAuth)
     postBusinessLicense(req: Request, res: Response) {
         res.status(201).send({ businessLicense: `/images/licenses/${req.tokenPayload?.userId}` });
     }
