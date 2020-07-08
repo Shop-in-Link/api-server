@@ -94,6 +94,23 @@ export default {
             );
 
             return { token: token, userId: user._id.toString() };
+        },
+
+        /**
+         * Return current user information.
+         *
+         * @param parent Parent of resolver chain.
+         * @param args Should be null.
+         * @param tokenPayload A JWT payload injected from context handler.
+         */
+        user: async (parent: any, args: any, { tokenPayload }: { tokenPayload: ITokenPayload }) => {
+            const user = await User.findById(tokenPayload.userId);
+
+            if (!user) {
+                throw new UserInputError('User not found.');
+            }
+
+            return { ...user._doc, _id: user._id.toString() };
         }
     }
 };

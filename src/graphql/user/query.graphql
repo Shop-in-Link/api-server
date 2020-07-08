@@ -5,4 +5,5 @@ type AuthData {
 
 type Query {
     login(email: String! , password: String!): AuthData!
+    user: User! @auth(requires: Auth)
 }
