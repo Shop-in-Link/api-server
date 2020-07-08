@@ -3,6 +3,7 @@ import { UserInputError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
 import User, { IUser } from '../../models/user';
+import { Role } from "../../models/enums/Role";
 import { readJwtSecret } from '../../utils/key/jwt';
 import { ITokenPayload } from '../../utils/TokenPayload';
 
@@ -16,6 +17,11 @@ export default {
          */
         createUser: async (parent: any, { userInput }: ICreateUserInput) => {
             const { email, password, name, role } = userInput;
+
+            // Admin account is not supposed to be created in this way.
+            if (role == Role.Admin) {
+                throw new UserInputError('Not allowed.');
+            }
 
             const hashedPassword = await bcrypt.hash(password, 12);
 
