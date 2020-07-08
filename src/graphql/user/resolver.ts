@@ -49,7 +49,7 @@ export default {
             const user = await User.findById(tokenPayload.userId);
 
             if (!user) {
-                return false;
+                throw new UserInputError('User not found.');
             }
 
             user.remove();
