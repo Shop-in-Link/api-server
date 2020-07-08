@@ -6,6 +6,7 @@ import 'dotenv/config';
 import { mergedTypeDefs as typeDefs, mergedResolvers as resolvers } from './graphql';
 import { ValidateDirective, AuthDirective } from './graphql/directive';
 import { contextHandler } from './middlewares/contextHandler';
+import { errorHandler } from './middlewares/errorHandler';
 import { AppRouter } from './AppRouter';
 
 const app = express();
@@ -17,6 +18,7 @@ const server = new ApolloServer({
 });
 
 app.use(AppRouter.getInstance());
+app.use(errorHandler);
 
 server.applyMiddleware({ app });
 
