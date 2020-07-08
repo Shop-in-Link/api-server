@@ -6,3 +6,5 @@ export const jwtPublicPath = path.join(__dirname, '..', '..', process.env.JWT_PU
 
 export const graphqlTypesPath = path.join(__dirname, '..', '..', 'src', 'graphql', '**/*.graphql');
 export const graphqlResolversPath = path.join(__dirname, '..', 'graphql', '**/resolver.js');
+
+export const businessLicensesPath = path.join(__dirname, '..', '..', 'images', 'licenses');
