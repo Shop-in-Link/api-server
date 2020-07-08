@@ -2,8 +2,8 @@ import express from 'express';
 import { AuthenticationError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 
-import { readJwtSecret } from './key/jwt';
-import { ITokenPayload } from './TokenPayload';
+import { readJwtSecret } from '../utils/key/jwt';
+import { ITokenPayload } from '../utils/TokenPayload';
 
 export const contextHandler = async ({ req }: { req: express.Request }) => {
     const authHeader = req.get('Authorization');

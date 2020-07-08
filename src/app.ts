@@ -5,7 +5,7 @@ import 'dotenv/config';
 
 import { mergedTypeDefs as typeDefs, mergedResolvers as resolvers } from './graphql';
 import { ValidateDirective, AuthDirective } from './graphql/directive';
-import { contextHandler } from './utils/contextHandler';
+import { contextHandler } from './middlewares/contextHandler';
 import { AppRouter } from './AppRouter';
 
 const app = express();
