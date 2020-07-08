@@ -12,6 +12,6 @@ input CreateUserInput {
 }
 
 type Mutation {
-    createUser(userInput: CreateUserInput): User!
+    createUser(userInput: CreateUserInput!): User!
     deleteUser: Boolean! @auth(requires: Auth)
 }
