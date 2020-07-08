@@ -8,6 +8,7 @@ import { ValidateDirective, AuthDirective } from './graphql/directive';
 import { contextHandler } from './middlewares/contextHandler';
 import { errorHandler } from './middlewares/errorHandler';
 import { AppRouter } from './AppRouter';
+import './controllers/UploadController';
 
 const app = express();
 const server = new ApolloServer({
