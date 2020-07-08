@@ -14,12 +14,12 @@ class UploadController {
      * @param res Response object from Express.
      */
     @Post('/businessLicense')
+    @Use(isAuth)
     @Use(multer({
         storage: licenseStorage,
         fileFilter: licenseFileFilter,
         limits: { fileSize: maxFileSize }
     }).single('license'))
-    @Use(isAuth)
     postBusinessLicense(req: Request, res: Response) {
         res.status(201).send({ businessLicense: `/images/licenses/${req.tokenPayload?.userId}` });
     }

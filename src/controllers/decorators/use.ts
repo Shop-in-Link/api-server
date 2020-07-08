@@ -13,7 +13,9 @@ export function Use(middleware: RequestHandler) {
     return function(target: any, key: string, desc: PropertyDescriptor) {
         const middlewares = Reflect.getMetadata(MetaKeys.Middleware, target, key) || [];
 
-        middlewares.push(middleware);
+        // Decorators are executed from bottom to top (resulting composite (f ∘ g)(x) is equivalent to f(g(x))),
+        // new middleware should be added to front of the middlewares array for syntactic sugar.
+        middlewares.unshift(middleware);
 
         Reflect.defineMetadata(MetaKeys.Middleware, [...middlewares], target, key);
     }
