@@ -11,7 +11,13 @@ input CreateUserInput {
     role: Role!
 }
 
+input UpdateUserInput {
+    name: UserNameInput
+    businessLicense: String
+}
+
 type Mutation {
     createUser(userInput: CreateUserInput!): User!
     deleteUser: Boolean! @auth(requires: Auth)
+    updateUser(userInput: UpdateUserInput!): User! @auth(requires: Auth)
 }

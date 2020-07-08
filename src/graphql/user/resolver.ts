@@ -55,6 +55,29 @@ export default {
             user.remove();
 
             return true;
+        },
+
+        /**
+         * Update user name and businessLicense.
+         * Use other mutation to change password or role.
+         *
+         * @param parent Parent of resolver chain.
+         * @param args Should be null.
+         * @param tokenPayload A JWT payload injected from context handler.
+         */
+        updateUser: async (parent: any, { userInput }: IUpdateUserInput, { tokenPayload }: { tokenPayload: ITokenPayload }) => {
+            const user = await User.findById(tokenPayload.userId);
+
+            if (!user) {
+                throw new UserInputError('User not found.');
+            }
+
+            user.name = userInput.name || user.name;
+            user.businessLicense = userInput.businessLicense || user.businessLicense;
+
+            const updatedUser = await user.save();
+
+            return { ...updatedUser._doc, _id: updatedUser._id.toString() };
         }
     },
 
@@ -121,5 +144,12 @@ interface ICreateUserInput {
         password: IUser['password'];
         name: IUser['name'];
         role: IUser['role'];
+    }
+}
+
+interface IUpdateUserInput {
+    userInput: {
+        name?: IUser['name'];
+        businessLicense?: IUser['businessLicense'];
     }
 }
